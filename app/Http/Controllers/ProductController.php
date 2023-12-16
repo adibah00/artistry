@@ -12,6 +12,11 @@ class ProductController extends Controller
         return view('products.product', ['products' => $products]);
     }
 
+    public function view(){
+        $products = Product::all();
+        return view('dashboard', ['products' => $products]);
+    }
+
     public function create(){
         return view('products.create');
     }
@@ -36,7 +41,7 @@ class ProductController extends Controller
 
         $newProduct = Product::create($data);
 
-        return redirect(route('product.index'));
+        return redirect(route('products.index'));
     }
 
     public function edit(Product $product){
@@ -63,15 +68,15 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect(route('product.index'))->with('Success', 'Product Updated Successfully');
+        return redirect(route('products.index'))->with('Success', 'Product Updated Successfully');
     }
 
     public function destroy(Product $product){
         $product->delete();
-        return redirect(route('product.index'))->with('Success', 'Product Deleted Successfully');
+        return redirect(route('products.index'))->with('Success', 'Product Deleted Successfully');
     }
 
     public function cancel(){
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 }

@@ -18,13 +18,24 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('product.index') }}" :active="request()->routeIs('product.index')">
+                    <x-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('product.index')">
                         {{ __('Product List') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">
                         {{ __('Add Product') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('videos.index') }}" :active="request()->routeIs('videos.index')">
+                        {{ __('Manage Video') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('videos.create') }}" :active="request()->routeIs('videos.create')">
+                        {{ __('Add Video') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -21,7 +21,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-x-auto shadow-xl sm:rounded-lg">
                     <div >
-                        <table class="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 bg-blue-800 rounded-lg overflow-hidden">
+                        <table class="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400  0 rounded-lg overflow-hidden">
                             <thead class="text-xs uppercase dark:text-white dark:bg-gray-900">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center">

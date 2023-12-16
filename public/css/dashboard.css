@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Define the grid container */
+.grid-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr; /* Three columns in the second and third rows */
+  gap: 10px; /* Adjust the gap between grid items */
+}
+
+/* Style for each grid item */
+.grid-item {
+  padding: 20px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Style for the banner (first row) */
+.banner {
+  grid-column: 1 / span 3; /* Span the entire width of the grid */
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+  border-bottom: 2px solid #fff; /* Border at the bottom of the banner */
+}
+
+.grid-item.banner {
+  position: relative;
+  padding: 0; /* Remove padding */
+}
+
+.grid-item.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.grid-item.banner p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black; /* Set text color */
+  font-size: 24px; /* Adjust text size */
+  font-weight: 1000;
+}
+
+/* Style for each row */
+.grid-container > :nth-child(3n+1) {
+  border-bottom: 2px solid #ddd; /* Border at the bottom of each row */
+}
+
+/* Style for each column */
+.grid-container > :nth-child(3n) {
+  /* border-right: 2px solid #ddd; Border at the right of each column */
+}
+
+/* Style for the third row to span all columns */
+.grid-container > :nth-child(7),
+.grid-container > :nth-child(8),
+.grid-container > :nth-child(9) {
+  grid-column: span 3;
+}
+
+.grid-item.third-row {
+  /* Add your styling for the third row here */
+  /* For example, if you want to remove borders between columns */
+  grid-column: 1 / span 3; /* Span the entire width of the grid */
+  border-right: none; /* Remove right border for each column in the third row */
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-container {
+  display: flex;
+  overflow-x: auto;
+}
+
+.product-card {
+  flex: 0 0 auto;
+  margin-right: 10px; /* Adjust margin as needed */
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  max-width: 200px; /* Adjust max-width as needed */
+}
