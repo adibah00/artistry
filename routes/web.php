@@ -38,6 +38,6 @@ Route::middleware([
     Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/video/add', [VideoController::class, 'create'])->name('videos.create');
     Route::post('/video/store', [VideoController::class, 'store'])->name('videos.store');
-    Route::get('/video/tutorials', [VideoController::class, 'index'])->name('videos.index');
+    Route::get('/video-tutorial', [VideoController::class, 'index'])->name('videos.index');
 
 });

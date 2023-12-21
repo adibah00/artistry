@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Tag;
 use App\Models\Video;
+use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::with('tags')->get();
-        return view('content.videoTutorial', ['videos' => $videos]);
+        $videos = Video::all();
+        return view('content.videoTutorial', compact('videos'));
     }
 
     public function create()
@@ -21,33 +19,44 @@ class VideoController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'nullable',
-            'video_path' => 'required',
-            'tags' => 'nullable|array', // Assuming tags will be an array
+            'url' => 'required|mimetypes:video/mp4,video/quicktime,video/webm,video/x-ms-wmv',
         ]);
 
-        $video = Video::create([
+        $videoFile = $request->file('url');
+        $originalFileName = $videoFile->getClientOriginalName();
+        $videoPath = $videoFile->storeAs('videos', $originalFileName, 'public');
+
+        Video::create([
             'title' => $request->title,
             'description' => $request->description,
-            'video_path' => $request->file('video_path')->store('videos', 'public'),
+            'url' => $videoPath,
         ]);
 
-        if ($request->tags) {
-            $tagNames = explode(',', $request->tags);
-            $tags = Tag::whereIn('name', $tagNames)->get();
+        return redirect()->route('videos.index');
+    }
 
-            foreach ($tagNames as $tagName) {
-                if (!$tags->contains('name', $tagName)) {
-                    $tag = Tag::create(['name' => $tagName]);
-                    $tags->push($tag);
-                }
-            }
+    public function show(Video $video)
+    {
+        return view('videos.show', compact('video'));
+    }
 
-            $video->tags()->sync($tags);
-        }
+    public function edit(Video $video)
+    {
+        return view('videos.edit', compact('video'));
+    }
 
+    public function update(Request $request, Video $video)
+    {
+        $video->update($request->all());
+        return redirect()->route('videos.index');
+    }
+
+    public function destroy(Video $video)
+    {
+        $video->delete();
         return redirect()->route('videos.index');
     }
 }

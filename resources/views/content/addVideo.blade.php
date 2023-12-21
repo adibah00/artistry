@@ -34,8 +34,8 @@
                                     <textarea name="description" id="description" class="form-control" placeholder="Video description"></textarea>
                                 </div>
                                 <div class="form-group dark:text-white">
-                                    <label for="video_path">Video File</label>
-                                    <input type="file" name="video_path" id="video_path" class="form-control" accept="video/*" placeholder="Upload Video File" required>
+                                    <label for="url">Video File</label>
+                                    <input type="file" name="url" id="url" class="form-control" accept="videos/*" placeholder="Upload Video File" required>
                                 </div>
                                 <div class="text-center dark:text-white">
                                     <button type="submit" class="btn btn-primary">Submit</button>
