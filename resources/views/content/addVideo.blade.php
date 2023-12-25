@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="form-group dark:text-white">
                                     <label for="url">Video File</label>
-                                    <input type="file" name="url" id="url" class="form-control" accept="videos/*" placeholder="Upload Video File" required>
+                                    <input type="file" name="url" class="form-control" placeholder="Upload Video File" required>
                                 </div>
                                 <div class="text-center dark:text-white">
                                     <button type="submit" class="btn btn-primary">Submit</button>

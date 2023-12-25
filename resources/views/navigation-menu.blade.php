@@ -28,13 +28,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('videos.index') }}" :active="request()->routeIs('videos.index')">
+                    <x-nav-link href="{{ route('videos.fetch') }}" :active="request()->routeIs('videos.fetch')">
                         {{ __('Manage Video') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('videos.create') }}" :active="request()->routeIs('videos.create')">
+                    <x-nav-link href="{{ route('videos.index') }}" :active="request()->routeIs('videos.index')">
                         {{ __('Add Video') }}
                     </x-nav-link>
                 </div>

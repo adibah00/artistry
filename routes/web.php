@@ -36,8 +36,10 @@ Route::middleware([
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
-    Route::get('/video/add', [VideoController::class, 'create'])->name('videos.create');
+    Route::get('/video', [VideoController::class, 'index'])->name('videos.index');
     Route::post('/video/store', [VideoController::class, 'store'])->name('videos.store');
-    Route::get('/video-tutorial', [VideoController::class, 'index'])->name('videos.index');
-
+    Route::get('/video-tutorial', [VideoController::class, 'fetch'])->name('videos.fetch');
+    Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+    Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update');
+    Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy');
 });

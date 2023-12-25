@@ -22,22 +22,29 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="container">
                         <div class="row">
-                            @if($videos->isEmpty())
+                            @if(empty($data))
                                 <p>No videos available</p>
                             @else
-                                @foreach($videos as $video)
+                                @foreach($data as $video)
                                     <div class="col-md-6">
-                                        <div class="card mb-4">
-                                            <div class="card-body">
-                                                <h3 class="card-title">{{ $video->title }}</h3>
-                                                <p class="card-text">{{ $video->description }}</p>
+                                        <div class="card mb-4" style="background-color: #001f3f; color: #ffffff;">
+                                            <div class="card-body text-center">
+                                                <h3 class="card-title font-weight-bold">{{ $video['title'] }}</h3>
                                                 <video controls width="100%" class="mb-3">
-                                                    @foreach ($video->getVideoSources() as $source)
-                                                        <source src="{{ asset('videos/' . $source) }}" type="video/mp4">
+                                                    @foreach ($video as $source)
+                                                    <source src="{{ asset('videos') }}/{{ $video['url'] }}" type="video/mp4">
                                                     @endforeach
                                                 </video>
-                                                <p class="card-text">Video URL: {{ $video->url }}</p>
-                                                <p class="card-text">Full Path: {{ public_path('videos/' . $video->url) }}</p>
+                                                <p class="card-text"> Video Description : {{ $video['description'] }}</p>
+
+                                                <div>
+                                                    <a href="{{ route('videos.edit', $video['id']) }}" class="btn btn-primary mr-2">Edit</a>
+                                                    <form action="{{ route('videos.destroy', $video['id']) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -50,9 +57,5 @@
         </div>
     </x-app-layout>
 
-    <!-- Add Bootstrap JS and Popper.js (if needed) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-U7UqBscFHAHzbJ/8Ll7/5NJsxPz+KGpDMST6vEe6D5uqj7Ij05rY7dN+I5J6S5L" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
