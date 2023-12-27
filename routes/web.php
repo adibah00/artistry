@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    
 
     Route::get('/product', [ProductController::class, 'index'])->name('products.index');
     Route::get('/dashboard', [ProductController::class, 'view'])->name('dashboard');
@@ -42,4 +41,10 @@ Route::middleware([
     Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
     Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update');
     Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy');
+
+    // Add to cart
+
+    Route::post('/products/{product}/addToCart', [CartController::class, 'addToCart'])->name('user.addToCart');
+    Route::get('/user/cart', [CartController::class, 'addToCartPage'])->name('user.cart');
+
 });
