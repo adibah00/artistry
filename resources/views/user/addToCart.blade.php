@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artistry</title>
+    <title>Artistry - Add To Cart</title>
     <link rel="icon" href="{{ asset('images/makeupIcon.png') }}" type="image/png">
 </head>
 <body>
@@ -18,24 +18,29 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <h1>Add to cart</h1>
-                    <!-- Display a list of products -->
-                    @foreach($products as $product)
-                        <div class="product-card">
-                            <img src="{{ asset('storage/images/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
-                            <h4><b>{{ $product->brand }}</b></h4>
-                            <p>{{ $product->name }}</p>
-                            <p>Price: RM {{ $product->price }}</p>
+                    <h1>Add to Cart</h1>
+                    <!-- Display the added cart items -->
+                    @if(session('success'))
+                        <p>{{ session('success') }}</p>
+                    @endif
 
-                            <!-- Form to add the product to the cart -->
-                            <form action="{{ route('user.addToCart', ['product' => $product->id]) }}" method="post">
-                                @csrf
-                                <button type="submit" class="add-to-cart-btn">
-                                    Add to Cart
-                                </button>
-                            </form>
+                    <!-- Display the added cart items -->
+                    @if($cartItems->isNotEmpty())
+                        <h2>Added to Cart:</h2>
+                        <div class="shopping-cart">
+                            @foreach($cartItems as $cartItem)
+                                <div class="cart-item">
+                                    <img src="{{ asset('storage/images/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
+                                    <div class="cart-item-details">
+                                        <h4>{{ $cartItem->product->brand }}</h4>
+                                        <p>{{ $cartItem->product->name }}</p>
+                                        <p>Price: RM {{ $cartItem->product->price }}</p>
+                                        <p>Quantity: {{ $cartItem->quantity }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>

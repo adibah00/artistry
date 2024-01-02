@@ -99,14 +99,15 @@ body {
 .scrollable-row {
   display: flex;
   overflow-x: auto;
-  padding: 10px; /* Add some padding for aesthetics */
+  width: 100%;
+  /* padding: 10px; Add some padding for aesthetics */
 }
 
 /* Add margin to the grid items to separate them */
 .scrollable-row .grid-item {
   margin-right: 10px;
-  flex: 0 0 auto; /* Adjust flex property */
-  width: 50%;    /* Set width to 100% */
+  flex: 0 0 auto;
+  width: 100%;    /* Set width to 100% */
 }
 
 .product-image-container {
@@ -130,6 +131,26 @@ body {
   outline: none;
 }
 
+.cart-icon-btn {
+  position: relative;
+  display: inline-block;
+}
+
+.floating-cart-icon {
+  font-size: 24px; /* Adjust the icon size as needed */
+  margin: 10px;
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2em 0.5em;
+  position: absolute;
+  top: -8px; /* Adjust the top value to position the badge above the icon */
+  right: -8px; /* Adjust the right value to position the badge to the left of the icon */
+}
+
 .floating-navigation {
   position: fixed;
   bottom: 0;
@@ -141,6 +162,9 @@ body {
   transform: translateX(-50%); /* Center the element horizontally */
 }
 
+.cart-icon-btn:not(:last-child) {
+  margin-right: 20px; /* Adjust margin between icons as needed */
+}
 
 .cart-icon-btn {
   background: none;
@@ -152,11 +176,4 @@ body {
 .cart-icon-btn i {
   font-size: 24px; /* Adjust the icon size as needed */
   margin: 10px;
-}
-
-
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr; /* Change to a single column layout on small screens */
-  }
 }

@@ -79,4 +79,5 @@ class ProductController extends Controller
     public function cancel(){
         return redirect()->route('products.index');
     }
+
 }

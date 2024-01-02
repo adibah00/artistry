@@ -41,10 +41,11 @@ Route::middleware([
     Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
     Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update');
     Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy');
+    // Route::post('/addcart/{id}', [ProductController::class, 'addToCart'])->name('user.addToCart');
 
     // Add to cart
 
-    Route::post('/products/{product}/addToCart', [CartController::class, 'addToCart'])->name('user.addToCart');
-    Route::get('/user/cart', [CartController::class, 'addToCartPage'])->name('user.cart');
+    Route::post('/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('user.addToCart');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('user.showCart');
 
 });

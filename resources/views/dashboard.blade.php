@@ -29,7 +29,6 @@
 
 
                         <!-- Second Row (Three Columns) -->
-                        <div class="scrollable-row">
                             <div class="grid-item">
                                 <img src="{{ asset('images/beauty_service.jpeg') }}" alt="Banner Image" style="width: 100%; height: 200px; object-fit: cover;">
                                 <p>BEAUTY SERVICES</p>
@@ -42,7 +41,6 @@
                                 <img src="{{ asset('images/New-Product.jpeg') }}" alt="Banner Image" style="width: 100%; height: 200px; object-fit: cover;">
                                 <p>NEW PRODUCT</p>
                             </div>
-                        </div>
 
                         <!-- Third Row (Three Columns) LETAK PRODUCT2 YANG ADA SINI -->
                         <div class="grid-item third-row">
@@ -60,7 +58,7 @@
                                                 <img src="{{ asset('storage/images/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
                                                 <!-- Add container for the icon -->
                                                 <div class="cart-icon-container">
-                                                    <form action="{{ route('user.addToCart', ['product' => $product->id]) }}" method="post">
+                                                    <form action="{{ route('user.addToCart', ['productId' => $product->id]) }}" method="post">
                                                         @csrf
                                                         <button type="submit" class="add-to-cart-btn">
                                                             <i class="material-icons" style="color:red;">add_shopping_cart</i>
@@ -83,8 +81,9 @@
                             <a href="#" class="cart-icon-btn">
                                 <i class="material-icons" style="color: white;">home</i>
                             </a>
-                            <a href="{{ route('user.cart') }}" class="cart-icon-btn">
+                            <a href="{{ route('user.showCart') }}" class="cart-icon-btn">
                                 <i class="material-icons" style="color: white;">shopping_cart</i>
+                                <span class="badge">1</span>
                             </a>
                             <a href="#" class="cart-icon-btn">
                                 <i class="material-icons" style="color: white;">video_library</i>
