@@ -44,8 +44,9 @@ Route::middleware([
     // Route::post('/addcart/{id}', [ProductController::class, 'addToCart'])->name('user.addToCart');
 
     // Add to cart
-
     Route::post('/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('user.addToCart');
     Route::get('/cart', [CartController::class, 'showCart'])->name('user.showCart');
+    Route::post('/user/update-cart', [CartController::class, 'updateCart'])->name('user.updateCart');
+    Route::delete('/remove-from-cart/{cartItem}', [CartController::class, 'removeFromCart'])->name('user.removeFromCart');
 
 });

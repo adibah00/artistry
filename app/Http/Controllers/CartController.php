@@ -41,20 +41,46 @@ class CartController extends Controller
         // Get the authenticated user
         $user = auth()->user();
 
-        // Output the user's ID for debugging
-        dd($user->id);
-
         // Fetch the cart items with their associated products
         $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
-
-        // Output the fetched cart items for debugging
-        dd($cartItems);
 
         // Get the count of items in the cart
         $cartItemCount = $cartItems->count();
 
         // Pass the cart items and their count to the view
         return view('user.addToCart', compact('cartItems', 'cartItemCount'));
+    }
+
+    public function updateCart(Request $request)
+    {
+        $user = auth()->user();
+
+        foreach ($request->input('quantity') as $cartItemId => $quantity) {
+            Cart::where('user_id', $user->id)
+                ->where('id', $cartItemId)
+                ->update(['quantity' => $quantity]);
+        }
+
+        return redirect()->route('user.showCart')->with('success', 'Cart updated successfully');
+    }
+
+    public function removeFromCart(Cart $cartItem)
+    {
+        $user = auth()->user();
+
+        // Ensure the cart item belongs to the authenticated user
+        if ($cartItem->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Delete the cart item
+        $cartItem->delete();
+
+        // Fetch the updated cart items
+        $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
+
+        // Pass the cart items to the view
+        return redirect()->route('user.showCart')->with('success', 'Product removed from cart successfully');
     }
 
 }
