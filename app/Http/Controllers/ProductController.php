@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Cart;
 
 class ProductController extends Controller
 {
@@ -13,8 +14,11 @@ class ProductController extends Controller
     }
 
     public function view(){
+        $user = auth()->user();
+        $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
+        $cartItemCount = $cartItems->count();
         $products = Product::all();
-        return view('dashboard', ['products' => $products]);
+        return view('dashboard', compact('products', 'cartItems', 'cartItemCount'));
     }
 
     public function create(){

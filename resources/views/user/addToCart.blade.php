@@ -6,6 +6,10 @@
     <title>Artistry - Add To Cart</title>
     <link rel="icon" href="{{ asset('images/makeupIcon.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
 </head>
 <body>
 <x-app-layout>
@@ -56,6 +60,7 @@
                             </form>
                         </div>
                     @endif
+                    <x-floating-navigation :cartItemCount="$cartItemCount" />
                 </div>
             </div>
         </div>

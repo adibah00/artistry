@@ -17,6 +17,13 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('videos.fetch') }}" :active="request()->routeIs('videos.fetch')">
+                            {{ __('Manage Video') }}
+                        </x-nav-link>
+                    </div>
+
                     @if(Auth::user()->position === 'admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('product.index')">
@@ -26,11 +33,6 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('product.create') }}" :active="request()->routeIs('product.create')">
                             {{ __('Add Product') }}
-                        </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link href="{{ route('videos.fetch') }}" :active="request()->routeIs('videos.fetch')">
-                            {{ __('Manage Video') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

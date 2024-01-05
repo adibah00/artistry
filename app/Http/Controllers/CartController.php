@@ -83,4 +83,20 @@ class CartController extends Controller
         return redirect()->route('user.showCart')->with('success', 'Product removed from cart successfully');
     }
 
+    // Inside the relevant controller method for rendering dashboard.blade.php
+        public function showDashboard()
+        {
+            // Get the authenticated user
+            $user = auth()->user();
+
+            // Fetch the cart items with their associated products
+            $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
+
+            // Get the count of items in the cart
+            $cartItemCount = $cartItems->count();
+
+            // Pass the cart items and their count to the view
+            return view('dashboard', compact('cartItems', 'cartItemCount'));
+        }
+
 }

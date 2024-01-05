@@ -76,20 +76,7 @@
                         </div>
                     </div>
 
-                    <div class="floating-navigation">
-                        <div class="nav-buttons">
-                            <a href="#" class="cart-icon-btn">
-                                <i class="material-icons" style="color: white;">home</i>
-                            </a>
-                            <a href="{{ route('user.showCart') }}" class="cart-icon-btn">
-                                <i class="material-icons" style="color: white;">shopping_cart</i>
-                                <span class="badge">1</span>
-                            </a>
-                            <a href="#" class="cart-icon-btn">
-                                <i class="material-icons" style="color: white;">video_library</i>
-                            </a>
-                        </div>
-                    </div>
+                    <x-floating-navigation :cartItemCount="$cartItemCount" />
                 </div>
             </div>
         </div>

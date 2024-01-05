@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use App\Models\Cart;
 
 class VideoController extends Controller
 {
@@ -17,8 +18,10 @@ class VideoController extends Controller
     }
 
     public function fetch(){
+        $cartItems = Cart::where('user_id', auth()->id())->with('product')->get();
+        $cartItemCount = $cartItems->count();
         $data=Video::all()->toArray();
-        return view('content.videoTutorial', compact('data'));
+        return view('content.videoTutorial', compact('data', 'cartItemCount'));
     }
 
     public function store(Request $request)
