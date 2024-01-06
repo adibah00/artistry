@@ -36,7 +36,7 @@
                                 @csrf
                                 @foreach($cartItems as $cartItem)
                                     <div class="cart-item">
-                                        <img src="{{ asset('storage/images/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image">
+                                        <img src="{{ asset('storage/images/' . $cartItem->product->image) }}" alt="{{ $cartItem->product->name }}" class="cart-item-image" id="productImage_{{ $cartItem->id }}">
                                         <div class="cart-item-details">
                                             <h4>{{ $cartItem->product->brand }}</h4>
                                             <p>{{ $cartItem->product->name }}</p>
@@ -45,18 +45,15 @@
                                                 <label for="quantity_{{ $cartItem->id }}">Quantity:</label>
                                                 <input type="number" name="quantity[{{ $cartItem->id }}]" id="quantity_{{ $cartItem->id }}" value="{{ $cartItem->quantity }}" min="1" onchange="submitForm()" class="small-input">
                                             </div>
-
-                                            <!-- Add a delete button -->
-                                            <form method="post" action="{{ route('user.removeFromCart', ['cartItem' => $cartItem->id]) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-blue-500 hover:underline delete-btn">
-                                                    <i class="material-icons" style="color:red;">delete</i>
-                                                </button>
-                                            </form>
                                         </div>
                                     </div>
+                                    <!-- Add a delete button with a dynamic form -->
+                                    <button type="button" onclick="createDeleteForm('{{ route('user.removeFromCart', ['cartItem' => $cartItem->id]) }}')" class="text-blue-500 hover:underline delete-btn">
+                                        <i class="material-icons" style="color:red;">delete</i>
+                                    </button>
                                 @endforeach
+                                <!-- Add a submit button for updating quantities -->
+                                <button type="submit" class="btn btn-primary">Update Cart</button>
                             </form>
                         </div>
                     @endif
@@ -67,8 +64,45 @@
     </x-app-layout>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @foreach($cartItems as $cartItem)
+                document.getElementById('productImage_{{ $cartItem->id }}').addEventListener('click', function() {
+                    redirectToShop('{{ route('products.shop') }}');
+                });
+            @endforeach
+
+            function redirectToShop(shopRoute) {
+                window.location.href = shopRoute;
+            }
+        });
+    </script>
+
+    <script>
         function submitForm() {
             document.getElementById("updateCartForm").submit();
+        }
+
+        function createDeleteForm(action) {
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = action;
+
+            var csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_token';
+            csrfInput.value = '{{ csrf_token() }}';
+
+            var methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+
+            form.appendChild(csrfInput);
+            form.appendChild(methodInput);
+
+            document.body.appendChild(form);
+
+            form.submit();
         }
     </script>
 

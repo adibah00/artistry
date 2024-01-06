@@ -48,4 +48,6 @@ Route::middleware([
     Route::post('/user/update-cart', [CartController::class, 'updateCart'])->name('user.updateCart');
     Route::delete('/remove-from-cart/{cartItem}', [CartController::class, 'removeFromCart'])->name('user.removeFromCart');
 
+    // Shop
+    Route::get('/products', [ProductController::class, 'shop'])->name('products.shop');
 });

@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!-- <x-application-mark class="block h-9 w-auto" /> -->
-                        <img src="{{ asset('logo.jpg') }}" alt="Logo" class="block h-9 w-auto rounded-full">
+                        <img src="{{ asset('LOGO.JPG') }}" alt="Logo" class="block h-9 w-auto rounded-full">
                     </a>
                 </div>
 
@@ -21,6 +21,12 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('videos.fetch') }}" :active="request()->routeIs('videos.fetch')">
                             {{ __('Manage Video') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('products.shop') }}" :active="request()->routeIs('products.shop')">
+                            {{ __('Shop') }}
                         </x-nav-link>
                     </div>
 

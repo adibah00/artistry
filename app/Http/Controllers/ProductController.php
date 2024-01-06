@@ -13,6 +13,18 @@ class ProductController extends Controller
         return view('products.product', ['products' => $products]);
     }
 
+    public function shop(){
+        $products = Product::all();
+        $user = auth()->user();
+        $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
+        
+        // Calculate the cart item count
+        $cartItemCount = $cartItems->count();
+    
+        // Pass the variables to the view
+        return view('products.shop', compact('products', 'cartItemCount'));
+    }
+
     public function view(){
         $user = auth()->user();
         $cartItems = Cart::where('user_id', $user->id)->with('product')->get();

@@ -32,8 +32,10 @@ class CartController extends Controller
          // Fetch the updated cart items
          $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
 
+         $cartItemCount = $cartItems->count();
+
         // Pass the cart items to the view
-        return view('user.addToCart', compact('cartItems'))->with('success', 'Product added to cart successfully');
+        return view('user.addToCart', compact('cartItems', 'cartItemCount'))->with('success', 'Product added to cart successfully');
     }
 
     public function showCart()
@@ -76,12 +78,10 @@ class CartController extends Controller
         // Delete the cart item
         $cartItem->delete();
 
-        // Fetch the updated cart items
-        $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
-
-        // Pass the cart items to the view
+        // Redirect directly to the cart view
         return redirect()->route('user.showCart')->with('success', 'Product removed from cart successfully');
     }
+
 
     // Inside the relevant controller method for rendering dashboard.blade.php
         public function showDashboard()
